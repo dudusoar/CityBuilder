@@ -48,7 +48,7 @@ public class Point
     }
 }
 
-// 定义网格的状态类型
+// 网格的状态类型
 public enum CellType
 {
     Empty,
@@ -58,7 +58,7 @@ public enum CellType
     None
 }
 
-// 定义了单
+//单元格
 public class Grid
 {
     private CellType[,] _grid;

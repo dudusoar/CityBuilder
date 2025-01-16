@@ -36,11 +36,10 @@ public class InputManager: MonoBehaviour
             Vector3Int positionInt = Vector3Int.RoundToInt(hit.point);
             return positionInt;
         }
-
         return null;
     }
     
-    #region check input event
+    #region Check Input Event
 
     private void CheckClickDownEvent()
     {
@@ -62,7 +61,7 @@ public class InputManager: MonoBehaviour
         }
     }
 
-    public void CheckClickHoldEvent()
+    private void CheckClickHoldEvent()
     {
         // hold鼠标键但不会误触UI界面
         if(Input.GetMouseButton(0) && EventSystem.current.IsPointerOverGameObject() == false)
@@ -75,7 +74,7 @@ public class InputManager: MonoBehaviour
         }
     }
 
-    public void CheckArrowInput()
+    private void CheckArrowInput()
     {
         cameraMovementVector = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
     }
