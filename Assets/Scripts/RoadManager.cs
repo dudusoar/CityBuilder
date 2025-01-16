@@ -9,8 +9,8 @@ public class RoadManager : MonoBehaviour
     public List<Vector3Int> temporaryPlacementPosition = new List<Vector3Int>();
     public List<Vector3Int> roadPositionsToRecheck = new List<Vector3Int>();
 
-    private Vector3Int startPosition;
-    private bool placementmode = false;
+    private Vector3Int startPosition; //建造道路的起点
+    private bool placementMode = false; //是否点击放置
     
     public RoadFixer roadFixer;
 
@@ -30,13 +30,28 @@ public class RoadManager : MonoBehaviour
         {
             return;
         }
-        temporaryPlacementPosition.Clear();
-        temporaryPlacementPosition.Add(position);
-        roadPositionsToRecheck.Clear();
-        // 先放直线路段
-        placementManager.PlaceTemporaryStructure(position, roadFixer.deadEnd, CellType.Road);
-        // 再根据信息修改道路类型
+
+        if (placementMode == false)
+        {
+            temporaryPlacementPosition.Clear();
+            roadPositionsToRecheck.Clear();
+
+            placementMode = true;
+            startPosition = position;
+            
+            temporaryPlacementPosition.Add(position);
+            // 先放直线路段
+            placementManager.PlaceTemporaryStructure(position, roadFixer.deadEnd, CellType.Road);
+            // 再根据信息修改道路类型
+            
+        }
+        else
+        {
+            placementManager.RemoveAllTemporaryStructures();
+            temporaryPlacementPosition.Clear()
+        }
         FixRoadPrefabs();
+        
     }
 
     private void FixRoadPrefabs()
